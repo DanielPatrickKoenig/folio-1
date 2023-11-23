@@ -16,6 +16,7 @@ import TestComponent from './components/TestComponent.vue'
 
   <main>
     <TheWelcome />
+    
   </main>
 </template>
 
@@ -46,4 +47,7 @@ header {
     flex-wrap: wrap;
   }
 }
+</style>
+<style lang="scss">
+@import './scss/index.scss';
 </style>
