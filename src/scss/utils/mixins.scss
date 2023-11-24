@@ -1,0 +1,9 @@
+@function convertToRems($pixels) {
+    @return calc($pixels / 16px) * 1rem;
+}
+
+@mixin desktop {
+    @media screen and (min-width: $sizeDesktop) {
+        @content;
+    }
+}

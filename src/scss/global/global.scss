@@ -1,0 +1,6 @@
+html {
+    font-size: 1vw;
+    @include desktop{
+        font-size: 2.25vw;
+    }
+}

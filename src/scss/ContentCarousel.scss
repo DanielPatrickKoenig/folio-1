@@ -11,7 +11,7 @@
         top: 0;
         bottom: 0;
         height: 100%;
-        width: cRems(200px);
+        width: convertToRems(200px);
         display: flex;
         &-left{
             left: 0;
@@ -27,8 +27,8 @@
         }
     }
     .cc-sizing-element{
-        min-width: cRems(150px);
-        min-height: cRems(150px);
+        min-width: convertToRems(150px);
+        min-height: convertToRems(150px);
     }
     .cc-gesture-tracker{
         position: fixed;
@@ -44,12 +44,12 @@
         align-items: center;
         .cc-dot-item{
             display: block;
-            width: cRems(24px);
-            height: cRems(24px);
+            width: convertToRems(24px);
+            height: convertToRems(24px);
             border-radius: 50%;
             background-color: transparent;
-            box-shadow: 0 0 0 cRems(4px) #000000;
-            margin: cRems(20px);
+            box-shadow: 0 0 0 convertToRems(4px) #000000;
+            margin: convertToRems(20px);
             &-active{
                 background-color: #000000;
             }
