@@ -129,10 +129,6 @@
             ContentCarouselDots,
         },
         props: {
-            slides: {
-                required: true,
-                type: Array,
-            },
             showNavigation: {
                 default: false,
                 required: false,

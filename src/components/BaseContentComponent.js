@@ -1,7 +1,6 @@
 import { DataTypes } from '../utils/Utilities';
 export default{
     computed: {
-        cType: 'ContentComponent',
         dataTypes () {
             return DataTypes;
         },
@@ -9,4 +8,10 @@ export default{
             return [];
         },
     },
+    props: {
+        slides: {
+            required: true,
+            type: Array,
+        },
+    }
 };

@@ -40,10 +40,6 @@ export default {
         };
     },
     props: {
-        slides: {
-            required: true,
-            type: Array,
-        },
         exclusiveRows: {
             default: false,
             required: false,

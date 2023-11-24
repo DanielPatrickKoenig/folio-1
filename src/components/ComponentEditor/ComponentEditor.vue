@@ -51,17 +51,20 @@
 <script>
 import ContentCarousel from '..//ContentCarousel/ContentCarousel.vue';
 import ContentAccordion from '..//ContentAccordion/ContentAccordion.vue';
+import ContentCoverFlow from '..//ContentCoverFlow/ContentCoverFlow.vue';
 import { DataTypes } from '../../utils/Utilities';
 export default {
     components: {
         ContentCarousel,
         ContentAccordion,
+        ContentCoverFlow,
     },
     data () {
         return {
             contentComponents: [
                 { label: 'Carousel', component: ContentCarousel },
-                { label: 'Accordion', component: ContentAccordion }
+                { label: 'Accordion', component: ContentAccordion },
+                { label: 'Cover Flow', component: ContentCoverFlow },
             ],
             currentComponent: 0,
             availableComonents: [
