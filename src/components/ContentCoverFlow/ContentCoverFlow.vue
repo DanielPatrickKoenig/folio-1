@@ -5,7 +5,8 @@
                 v-for="(slide, index) in slides"
                 :key="index"
                 class="ccf-item"
-                :class="{ 'ccf-item-active': index === this.currentSlide }"
+                :style="{ 'z-index': index >= this.currentSlide ? (slides.length + 1) - index : 0 }"
+                :class="{ 'ccf-item-active': index === this.currentSlide, 'ccf-item-before': index < this.currentSlide, 'ccf-item-after': index > this.currentSlide }"
             >
                 <slot
                     name="slide"
@@ -99,6 +100,10 @@ export default {
                     
                 },
             ];
+        },
+        slideStackOrder () {
+            const maxSlide = (this.slides.length - this.currentSlide) + 1;
+            return this.slides.map((item, index) => this.slides.length - index);
         },
     },
     methods: {

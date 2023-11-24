@@ -4,3 +4,13 @@ html {
         font-size: 2.25vw;
     }
 }
+
+.content-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 convertToRems(3px) #ff0000 inset;
+    background-color: #cccccc;
+    height: 100%;
+    border-radius: convertToRems(20px);
+}

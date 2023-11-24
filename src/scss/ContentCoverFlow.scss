@@ -4,13 +4,38 @@
         justify-content: center;
 
         .ccf-item{
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            transition: width .5s;
             width: convertToRems(30px);
             height: convertToRems(200px);
+            perspective: 50rem;
+            .content-slide{
+                left: 50%;
+                transition: transform .5s;
+                transform: translateX(-50%);
+                width: convertToRems(200px);
+            }
+            &-before{
+                color: #00ff00;
+                .content-slide{
+                    transform: translateX(-50%) rotateY(65deg);
+                }
+            }
+            &-after{
+                color: #0000ff;
+                .content-slide{
+                    transform: translateX(-50%) rotateY(-65deg);
+                    
+                }
+            }
             &-active{
                 color: #ff0000;
                 width: convertToRems(200px);
+                .content-slide{
+                    transform: translateX(-7%);
+                    transform-origin: left;
+                    
+                }
             }
         }
     }
