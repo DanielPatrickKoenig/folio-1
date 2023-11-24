@@ -1,0 +1,15 @@
+.content-accordion{
+    .ca-row{
+        &-inner{
+            overflow: hidden;
+            transition: height .5s;
+            height: 0;
+            &.is-open{
+                height: auto;
+            }
+        }
+        &-header{
+
+        }
+    }
+}
