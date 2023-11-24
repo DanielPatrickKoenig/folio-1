@@ -1,6 +1,6 @@
 const DataTypes = {
     STRING: 'text',
-    NUMBER: 'numbrer',
+    NUMBER: 'number',
     BOOLEAN: 'checkbox',
 };
 

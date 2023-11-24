@@ -1,6 +1,18 @@
 <template>
     <div>
         <div class="ce-editor-ui">
+            <select 
+                v-model="currentComponent"
+                @change="onComponentChange"
+            >
+                <option 
+                    v-for="(comp, i) in contentComponents"
+                    :key="i"
+                    :value="i"
+                >
+                    {{ comp.label }}
+                </option>
+            </select>
             <div
                 v-for="(prop, i) in editableProperties"
                 :key="i"
@@ -18,13 +30,10 @@
                 </label>
             </div>
             {{ this.propertyMap }}
-            <!-- <select>
-
-            </select> -->
         </div>
         <div class="ce-component-container">
             <component 
-                :is="currentComponent"
+                :is="contentComponents[currentComponent].component"
                 v-bind="propertyMap"
                 :slides="[...new Array(10).keys()].map(item => `slide-${item}`)"
                 ref="compo"
@@ -41,15 +50,20 @@
 
 <script>
 import ContentCarousel from '..//ContentCarousel/ContentCarousel.vue';
+import ContentAccordion from '..//ContentAccordion/ContentAccordion.vue';
 import { DataTypes } from '../../utils/Utilities';
 export default {
     components: {
-        ContentCarousel
+        ContentCarousel,
+        ContentAccordion,
     },
     data () {
         return {
-            contentComponents: [],
-            currentComponent: ContentCarousel,
+            contentComponents: [
+                { label: 'Carousel', component: ContentCarousel },
+                { label: 'Accordion', component: ContentAccordion }
+            ],
+            currentComponent: 0,
             availableComonents: [
                 { component: ContentCarousel, name: 'Content Carousel' },
 
@@ -62,7 +76,7 @@ export default {
         }
     },
     mounted () {
-        this.contentComponents = this.$refs.compo;
+        // this.contentComponents = this.$refs.compo;
         console.log('content components', this.$refs.compo.$options.computed.propsMap());
         this.setEditableProperties();
     },
@@ -82,8 +96,11 @@ export default {
         onInputChange (e) {
             let value = e.target.value;
             if (e.target.type === DataTypes.BOOLEAN) value = e.target.checked;
-            if (e.target.type === DataTypes.NUMBER) value = Number(e.target.checked);
+            if (e.target.type === DataTypes.NUMBER) value = Number(e.target.value);
             this.propertyMap[e.target.getAttribute('pid')] = value;
+        },
+        onComponentChange () {
+            this.setEditableProperties();
         },
     }
 }

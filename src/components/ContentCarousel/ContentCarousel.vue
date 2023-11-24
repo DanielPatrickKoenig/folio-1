@@ -106,7 +106,6 @@
             :current="currentSlide % slides.length"
             @selected="onDotSelected"
         />
-        <div>{{ loopCount }}</div>
         <div
             v-if="dragging && moveCount > 2"
             aria-hidden="true"
@@ -179,6 +178,12 @@
                 loopCount: 0,
             };
         },
+        watch: {
+            loop () {
+                this.loopCount = 0;
+                this.currentSlide = this.currentSlide % this.slides.length;
+            },
+        },
         computed: {
             propsMap () {
                 return [
@@ -241,9 +246,7 @@
         },
         mounted () {
             this.initializeScaling();
-            if (this.autoplay) {
-                this.autoRotate();
-            }
+            this.autoRotate();
         },
         beforeDestroy () {
             if (this.$refs.sizingElement) {
@@ -326,11 +329,12 @@
             },
             async autoRotate () {
                 await new Promise(resolve => setTimeout(resolve, this.autoplayInterval));
-                if (this.$refs.cc && (this.currentSlide < this.slides.length - 1 || this.loop)) {
+                if (this.autoplay && (this.currentSlide < this.slides.length - 1 || this.loop)) {
                     this.currentSlide++;
                     this.loopCount = Math.floor((this.currentSlide) / this.slides.length);
+                }
+                if (this.$refs.cc) {
                     this.autoRotate();
-
                 }
             },
         },
