@@ -1,27 +1,49 @@
 <template>
     <div class="content-coverflow">
-        <div class="ccf-track">
-            <div
-                v-for="(slide, index) in slides"
-                :key="index"
-                class="ccf-item"
-                :style="{ 'z-index': index >= this.currentSlide ? (slides.length + 1) - index : 0 }"
-                :class="{ 'ccf-item-active': index === this.currentSlide, 'ccf-item-before': index < this.currentSlide, 'ccf-item-after': index > this.currentSlide }"
+        
+        <button 
+            v-if="showNavigation && currentSlide > 0"
+            class="ccf-button ccf-button-left"
+            :style="{ 'z-index': slides.length + 1 }"
+            @click="previos"
+        >
+            left
+        </button>
+        <button 
+            v-if="showNavigation && currentSlide < slides.length - 1"
+            class="ccf-button ccf-button-right"
+            :style="{ 'z-index': slides.length + 1 }"
+            @click="next"
+        >
+            right
+        </button>
+        
+        <div class="ccf-container">
+            <div 
+                class="ccf-track"
+                :style="{ 'margin-left': `${(inactiveWidth * currentSlide * -1) / 16}rem` }"
             >
-                <slot
-                    name="slide"
-                    v-bind="{ slide, index }"
+                <div
+                    v-for="(slide, index) in slides"
+                    :key="index"
+                    class="ccf-item"
+                    :style="{ 'z-index': index >= this.currentSlide ? (slides.length + 1) - index : 0, width: index === this.currentSlide ? 'inherit' : `${inactiveWidth / 16}rem` }"
+                    :class="{ 'ccf-item-active': index === this.currentSlide, 'ccf-item-before': index < this.currentSlide, 'ccf-item-after': index > this.currentSlide }"
                 >
-                    CONTENT
-                </slot>
+                    <slot
+                        name="slide"
+                        v-bind="{ slide, index }"
+                    >
+                        CONTENT
+                    </slot>
+                </div>
             </div>
         </div>
         <ContentCarousel
+            ref="carousel"
             :slides="slides"
-            :show-navigation="showNavigation"
             :autoplay="autoplay"
             :initial-slide="initialSlide"
-            :show-dots="showDots"
             :autoplay-interval="autoplayInterval"
             @slide-change="onSlideChange"
         >
@@ -36,7 +58,7 @@
 <script>
 import ContentCarousel from '../ContentCarousel/ContentCarousel.vue'
 import BaseContentComponent from '../BaseContentComponent';
-import { DataTypes } from '../../utils/Utilities';
+import { DataTypes, convertToRems } from '../../utils/Utilities';
 export default {
     name: 'ContentCoverFlow',
     extends: BaseContentComponent,
@@ -54,11 +76,6 @@ export default {
             required: false,
             type: Number,
         },
-        showDots: {
-            default: false,
-            required: false,
-            type: Boolean,
-        },
         autoplay: {
             default: false,
             required: false,
@@ -66,6 +83,11 @@ export default {
         },
         autoplayInterval: {
             default: 3000,
+            required: false,
+            type: Number,
+        },
+        inactiveWidth: {
+            default: 30,
             required: false,
             type: Number,
         },
@@ -81,11 +103,6 @@ export default {
                 {
                     property: 'showNavigation',
                     label: 'Show Navigation',
-                    type: DataTypes.BOOLEAN,
-                },
-                {
-                    property: 'showDots',
-                    label: 'Show dots',
                     type: DataTypes.BOOLEAN,
                 },
                 {
@@ -105,10 +122,17 @@ export default {
             const maxSlide = (this.slides.length - this.currentSlide) + 1;
             return this.slides.map((item, index) => this.slides.length - index);
         },
+        convertToRems,
     },
     methods: {
         onSlideChange (e) {
             this.currentSlide = e.newValue;
+        },
+        previos () {
+            this.$refs.carousel.goToSlide(this.currentSlide - 1);
+        },
+        next () {
+            this.$refs.carousel.goToSlide(this.currentSlide + 1);
         },
     },
 }

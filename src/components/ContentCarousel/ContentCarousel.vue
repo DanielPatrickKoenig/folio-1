@@ -326,7 +326,10 @@
             async autoRotate () {
                 await new Promise(resolve => setTimeout(resolve, this.autoplayInterval));
                 if (this.autoplay && (this.currentSlide < this.slides.length - 1 || this.loop)) {
+                    const oldValue = this.currentSlide;
                     this.currentSlide++;
+                    const newValue = this.currentSlide;
+                    this.$emit('slide-change', { newValue, oldValue });
                     this.loopCount = Math.floor((this.currentSlide) / this.slides.length);
                 }
                 if (this.$refs.cc) {

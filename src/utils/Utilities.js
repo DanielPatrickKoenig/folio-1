@@ -4,4 +4,9 @@ const DataTypes = {
     BOOLEAN: 'checkbox',
 };
 
-export { DataTypes };
+function convertToRems (pixels) {
+    const convertedValue = pixels / 16;
+    return `${convertedValue}rem`;
+}
+
+export { DataTypes, convertToRems };

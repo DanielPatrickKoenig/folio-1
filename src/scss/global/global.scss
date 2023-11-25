@@ -1,5 +1,5 @@
 html {
-    font-size: 1vw;
+    font-size: 4vw;
     @include desktop{
         font-size: 2.25vw;
     }
@@ -13,4 +13,5 @@ html {
     background-color: #cccccc;
     height: 100%;
     border-radius: convertToRems(20px);
+    font-size: convertToRems(40px);
 }

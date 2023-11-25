@@ -35,7 +35,7 @@
             <component 
                 :is="contentComponents[currentComponent].component"
                 v-bind="propertyMap"
-                :slides="[...new Array(15).keys()].map(item => `slide-${item}`)"
+                :slides="content"
                 ref="compo"
             >
                 <template #slide="{ index }">
@@ -74,7 +74,7 @@ export default {
             editableProperties: [],
             editableValues: [],
             propertyMap: {},
-            content: [...new Array(15).keys()].map(item => `slide-${item}`),
+            content: [...new Array(16).keys()].map(item => `slide-${item}`),
             DataTypes,
         }
     },

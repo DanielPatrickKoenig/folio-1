@@ -1,42 +1,69 @@
+$slideWidth: 200px;
+$slideHeight: 200px;
 .content-coverflow{
+    position: relative;
+    .ccf-container{
+        pointer-events: none;
+        width: convertToRems($slideWidth);
+        margin: 0 auto;
+    }
     .ccf-track{
         display: flex;
-        justify-content: center;
-
+        justify-content: flex-start;
+        width: convertToRems($slideWidth);
+        margin: 0 auto;
+        padding-left: convertToRems(14.4px);
+        transition: margin-left .5s;
         .ccf-item{
             position: relative;
             transition: width .5s;
-            width: convertToRems(30px);
-            height: convertToRems(200px);
+            height: convertToRems($slideHeight);
             perspective: 50rem;
             .content-slide{
                 left: 50%;
                 transition: transform .5s;
                 transform: translateX(-50%);
-                width: convertToRems(200px);
+                width: convertToRems($slideWidth);
             }
             &-before{
-                color: #00ff00;
                 .content-slide{
                     transform: translateX(-50%) rotateY(65deg);
                 }
             }
             &-after{
-                color: #0000ff;
                 .content-slide{
                     transform: translateX(-50%) rotateY(-65deg);
-                    
                 }
             }
             &-active{
-                color: #ff0000;
-                width: convertToRems(200px);
+                width: convertToRems($slideWidth);
                 .content-slide{
                     transform: translateX(-7%);
                     transform-origin: left;
-                    
                 }
             }
         }
     }
+    .content-carousel{
+        opacity: 0;
+        margin-top: convertToRems($slideWidth * -1);
+        .cc-sizing-element{
+            width: convertToRems($slideWidth);
+            height: convertToRems($slideHeight);
+        }
+    }
+    .ccf-button{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: convertToRems(40px);
+        height: convertToRems(40px);
+        &-left{
+            left: convertToRems(50px);
+        }
+        &-right{
+            right: convertToRems(50px);
+        }
+    }
+    
 }
