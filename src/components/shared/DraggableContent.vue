@@ -15,7 +15,6 @@
                 @touchstart="down"
                 @touchmove="move"
                 @touchend="up"
-                :style="{ width, height }"
             >
                 <slot>CONTENT</slot>
             </div>
