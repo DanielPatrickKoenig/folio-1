@@ -55,6 +55,11 @@ export default {
             required: false,
             type: Number,
         },
+        itemId: {
+            default: '',
+            required: false,
+            type: String
+        },
     },
     data () {
         return {
@@ -85,11 +90,12 @@ export default {
         },
         down (e) {
             const downPosition = this.processPointerEvent(e);
+            this.$emit('selected');
             this.dragging = true;
-            const processedPosition = { 
-                x: (Number(e.currentTarget.getAttribute('l')) / 100) * this.$refs.draggableContent.getBoundingClientRect().width,
-                y: (Number(e.currentTarget.getAttribute('t')) / 100) * this.$refs.draggableContent.getBoundingClientRect().height,
-            };
+            const processedPosition = this.processPosition({ 
+                xPercent: Number(e.currentTarget.getAttribute('l')), 
+                yPercent: Number(e.currentTarget.getAttribute('t')),
+            });
             this.offsetPostion = { 
                 x: downPosition.x - processedPosition.x,
                 y: downPosition.y - processedPosition.y
@@ -100,12 +106,36 @@ export default {
                 const movePosition = this.processPointerEvent(e);
                 this.dragPosition.x = movePosition.x - this.offsetPostion.x;
                 this.dragPosition.y = movePosition.y - this.offsetPostion.y;
-                this.dragPosition.xPercent = (this.dragPosition.x / this.$refs.draggableContent.getBoundingClientRect().width) * 100;
-                this.dragPosition.yPercent = (this.dragPosition.y / this.$refs.draggableContent.getBoundingClientRect().height) * 100;
+                this.setPosition(this.dragPosition);
+                // this.dragPosition.xPercent = (this.dragPosition.x / this.$refs.draggableContent.getBoundingClientRect().width) * 100;
+                // this.dragPosition.yPercent = (this.dragPosition.y / this.$refs.draggableContent.getBoundingClientRect().height) * 100;
             }
         },
         up () {
             this.dragging = false;
+            this.$emit('position-complete', { ...this.dragPosition, id: this.itemId });
+        },
+        processPosition ({ xPercent, yPercent }) {
+            return { 
+                x: (xPercent / 100) * this.$refs.draggableContent.getBoundingClientRect().width,
+                y: (yPercent / 100) * this.$refs.draggableContent.getBoundingClientRect().height,
+            };
+        },
+        setPosition ({ x, y }) {
+            this.dragPosition.xPercent = (x / this.$refs.draggableContent.getBoundingClientRect().width) * 100;
+            this.dragPosition.yPercent = (y / this.$refs.draggableContent.getBoundingClientRect().height) * 100;
+            this.broadcastPosition();
+        },
+        setPositionPercent ({ xPercent, yPercent }) {
+            // console.log(xPercent);
+            this.dragPosition.xPercent = xPercent;
+            this.dragPosition.yPercent = yPercent;
+            // this.broadcastPosition();
+        },
+        broadcastPosition () {
+            const { xPercent, yPercent } = this.dragPosition;
+            const { x, y } = this.processPosition({ xPercent, yPercent});
+            this.$emit('reposition', { x, y, xPercent, yPercent, id: this.itemId });
         },
     },
 }

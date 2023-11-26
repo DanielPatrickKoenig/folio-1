@@ -4,4 +4,24 @@
         width: convertToRems(500px);
         height: convertToRems(300px);
     }
+    .rotation-marker{
+        position: absolute;
+        width: 0;
+        height: 0;
+    }
+    .rotation-marker::after{
+        content: '';
+        width: convertToRems(10px);
+        height: convertToRems(10px);
+        display: block;
+        background-color: #000000;
+        left: 0;
+        top: 0;
+        transform: translate(-50%, -50%);
+    }
+    .rotation-element{
+        width: convertToRems(10px);
+        height: convertToRems(10px);
+        background-color: #ff0000;
+    }
 }

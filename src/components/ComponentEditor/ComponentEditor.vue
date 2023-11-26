@@ -77,7 +77,18 @@ export default {
             editableProperties: [],
             editableValues: [],
             propertyMap: {},
-            content: [...new Array(16).keys()].map(item => `slide-${item}`),
+            content: [...new Array(16).keys()].map(item => {
+                return {
+                    title: `slide numbrer ${item}`,
+                    scrapBook: {
+                        rotation: 0,
+                        x: 5 * item,
+                        y: 5,
+                        width: 10,
+                        height: 10,
+                    },
+                };
+            }),
             DataTypes,
         }
     },
