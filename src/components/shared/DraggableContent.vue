@@ -5,7 +5,7 @@
     >
         <div 
             class="draggable-content-container"
-            :style="{ left: `${dragPosition.xPercent}%`, top: `${dragPosition.yPercent}%` }"
+            :style="{ left: `${dragPosition.xPercent}%`, top: `${dragPosition.yPercent}%`, width, height }"
         >
             <div
                 class="draggable-content-item"

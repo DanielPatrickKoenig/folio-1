@@ -7,6 +7,8 @@
             <DraggableContent
                 v-for="(slide, index) in slides"
                 :key="index"
+                :width="`${dimensions[index].width}%`"
+                :height="`${dimensions[index].height}%`"
                 :left="dimensions[index].x"
                 :top="dimensions[index].y"
                 :item-id="index.toString()"
@@ -32,6 +34,8 @@
                 <DraggableContent
                     ref="rotator"
                     item-id="rotator"
+                    :width="convertToRems(24)"
+                    :height="convertToRems(24)"
                     @reposition="onRotatorMoved"
                     @position-complete="onRotationComplete"
                 >
@@ -44,7 +48,7 @@
 
 <script>
 import BaseContentComponent from '../BaseContentComponent.js';
-import { DataTypes } from '../../utils/Utilities';
+import { DataTypes, convertToRems } from '../../utils/Utilities';
 import DraggableContent from '../shared/DraggableContent.vue';
 import jstrig from 'jstrig';
 export default {
@@ -62,12 +66,12 @@ export default {
                 height: 10,
                 x: 5 * index,
                 y: 20,
-            }))
+            })),
         };
     },
     computed: {
         rotatorDistance () {
-            return 20;
+            return this.dimensions[this.selectedSlide].height * .5;
         },
         markerPosition () {
             return index => ({
@@ -88,12 +92,14 @@ export default {
             this.$refs.rotator.setPositionPercent(this.markerPosition(index));
         },
         onRotatorMoved (e) {
-            console.log('rotator moved', this.dimensions[this.selectedSlide]);
             this.dimensions[this.selectedSlide].rotation = jstrig.angle({ x: this.dimensions[this.selectedSlide].xPercent, y: this.dimensions[this.selectedSlide].yPercent }, { x: e.xPercent, y: e.yPercent });
+            this.dimensions[this.selectedSlide].width = jstrig.distance({ x: this.dimensions[this.selectedSlide].xPercent, y: this.dimensions[this.selectedSlide].yPercent }, { x: e.xPercent, y: e.yPercent }) * 2;
+            this.dimensions[this.selectedSlide].height = this.dimensions[this.selectedSlide].width;
         },
         onRotationComplete () {
             this.$refs.rotator.setPositionPercent(this.markerPosition(this.selectedSlide));
         },
+        convertToRems,
     },
 }
 </script>

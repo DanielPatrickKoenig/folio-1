@@ -16,8 +16,8 @@
         z-index: 1;
         transform: translate(-50%, -50%);
         touch-action: none;
-        width: convertToRems(24px);
-        height: convertToRems(24px);
+        width: 100%;
+        height: 100%;
         > * {
             width: 100%;
             height: 100%;

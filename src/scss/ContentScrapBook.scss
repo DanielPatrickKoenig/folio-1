@@ -2,7 +2,7 @@
     .csa-board{
         position: relative;
         width: convertToRems(500px);
-        height: convertToRems(300px);
+        height: convertToRems(500px);
     }
     .rotation-marker{
         position: absolute;
@@ -23,11 +23,11 @@
         background-color: #ff0000;
     }
     .content-slide{
-        width: convertToRems(150px);
-        height: convertToRems(150px);
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
     }
 }
