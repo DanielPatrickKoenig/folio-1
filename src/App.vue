@@ -1,21 +1,16 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import TestComponent from './components/TestComponent.vue'
+import ComponentEditor from './components/ComponentEditor/ComponentEditor.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <TestComponent prop-message="juggle this" />
-    </div>
+    
   </header>
 
   <main>
-    <TheWelcome />
+    <ComponentEditor />
     
   </main>
 </template>

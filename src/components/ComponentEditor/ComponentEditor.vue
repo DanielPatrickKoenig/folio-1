@@ -53,6 +53,7 @@ import ContentCarousel from '..//ContentCarousel/ContentCarousel.vue';
 import ContentAccordion from '..//ContentAccordion/ContentAccordion.vue';
 import ContentCoverFlow from '..//ContentCoverFlow/ContentCoverFlow.vue';
 import ContentScrapBook from '..//ContentScrapBook/ContentScrapBook.vue';
+import ContentLazyGrid from '..//ContentLazyGrid/ContentLazyGrid.vue';
 import { DataTypes } from '../../utils/Utilities';
 export default {
     components: {
@@ -60,6 +61,7 @@ export default {
         ContentAccordion,
         ContentCoverFlow,
         ContentScrapBook,
+        ContentLazyGrid,
     },
     data () {
         return {
@@ -67,7 +69,8 @@ export default {
                 { label: 'Carousel', component: ContentCarousel },
                 { label: 'Accordion', component: ContentAccordion },
                 { label: 'Cover Flow', component: ContentCoverFlow },
-                { label: 'Content Scrap Book', component: ContentScrapBook }
+                { label: 'Scrap Book', component: ContentScrapBook },
+                { label: 'Lazy Grid', component: ContentLazyGrid },
             ],
             currentComponent: 0,
             availableComonents: [

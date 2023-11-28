@@ -1,0 +1,33 @@
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.lazy-grid{
+    position: fixed;
+    top: convertToRems(150px);
+    bottom: convertToRems(60px);
+    left: 0;
+    right: 0;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    .lg-column{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .lg-item{
+            animation-name: fade-in;
+            animation-duration: 1.5s;
+            animation-iteration-count: 1;
+            height: convertToRems(250px);
+        }
+    }
+    
+}
