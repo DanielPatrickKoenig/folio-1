@@ -54,6 +54,7 @@ import ContentAccordion from '..//ContentAccordion/ContentAccordion.vue';
 import ContentCoverFlow from '..//ContentCoverFlow/ContentCoverFlow.vue';
 import ContentScrapBook from '..//ContentScrapBook/ContentScrapBook.vue';
 import ContentLazyGrid from '..//ContentLazyGrid/ContentLazyGrid.vue';
+import ContentPages from '..//ContentPages/ContentPages.vue';
 import { DataTypes } from '../../utils/Utilities';
 export default {
     components: {
@@ -62,6 +63,7 @@ export default {
         ContentCoverFlow,
         ContentScrapBook,
         ContentLazyGrid,
+        ContentPages,
     },
     data () {
         return {
@@ -71,6 +73,7 @@ export default {
                 { label: 'Cover Flow', component: ContentCoverFlow },
                 { label: 'Scrap Book', component: ContentScrapBook },
                 { label: 'Lazy Grid', component: ContentLazyGrid },
+                { label: 'Paginated', component: ContentPages },
             ],
             currentComponent: 0,
             availableComonents: [
