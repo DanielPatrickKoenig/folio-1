@@ -5,12 +5,11 @@
         @touchemove="move"
         ref="podContainer"
     >
-        {{ marker }}
         <div 
             v-for="(slide, index) in slides"
             :key="index"
             class="polypod-container"
-            :style="{ ...podPositions[index] }"
+            :class="`polypod-container-${index}`"
         >
             <ReactivePolypod
                 :points="points"
@@ -50,7 +49,7 @@ export default {
     },
     props: {
         points: {
-            default: 3,
+            default: 6,
             required: false,
             type: Number,
         },

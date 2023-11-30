@@ -30,7 +30,7 @@ export default {
             type: Number,
         },
         radius: {
-            default: 40,
+            default: 50,
             required: false,
             type: Number,
         }
@@ -42,7 +42,7 @@ export default {
                 x: 50,
                 y: 50,
             },
-            minDist: 55,
+            minDist: 65,
         };
     },
     computed: {

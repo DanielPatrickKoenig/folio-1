@@ -8,6 +8,24 @@
         .reactive-polypod{
             transform: translate(-50%, -50%);
         }
+        &-0{
+            left: convertToRems(300px);
+            top: convertToRems(75px);
+        }
+        &-1{
+            left: convertToRems(170.0961px);
+            top: convertToRems(150px);
+        }
+        &-2{
+            left: convertToRems(429.9039px);
+            top: convertToRems(150px);
+        }
+        &-3{
+            left: convertToRems(300px);
+            top: convertToRems(225px);
+        }
+
+        //64.95195
     }
     
     .reactive-point{
