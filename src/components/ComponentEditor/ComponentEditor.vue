@@ -55,6 +55,7 @@ import ContentCoverFlow from '..//ContentCoverFlow/ContentCoverFlow.vue';
 import ContentScrapBook from '..//ContentScrapBook/ContentScrapBook.vue';
 import ContentLazyGrid from '..//ContentLazyGrid/ContentLazyGrid.vue';
 import ContentPages from '..//ContentPages/ContentPages.vue';
+import ContentPolygrid from '..//ContentPolygrid/ContentPolygrid.vue';
 import { DataTypes } from '../../utils/Utilities';
 export default {
     components: {
@@ -64,6 +65,7 @@ export default {
         ContentScrapBook,
         ContentLazyGrid,
         ContentPages,
+        ContentPolygrid,
     },
     data () {
         return {
@@ -74,6 +76,7 @@ export default {
                 { label: 'Scrap Book', component: ContentScrapBook },
                 { label: 'Lazy Grid', component: ContentLazyGrid },
                 { label: 'Paginated', component: ContentPages },
+                { label: 'Polygrid', component: ContentPolygrid },
             ],
             currentComponent: 0,
             availableComonents: [

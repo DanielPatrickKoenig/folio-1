@@ -1,0 +1,26 @@
+.content-polypod{
+    width: convertToRems(600px);
+    height: convertToRems(600px);
+    .polypod-container{
+        width: 0;
+        height: 0;
+        position: absolute;
+        .reactive-polypod{
+            transform: translate(-50%, -50%);
+        }
+    }
+    
+    .reactive-point{
+        width: 0;
+        height: 0;
+        position: absolute;
+        &::after{
+            content: '';
+            width: convertToRems(16px);
+            height: convertToRems(16px);
+            background-color: #0000cc;
+            display: block;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
