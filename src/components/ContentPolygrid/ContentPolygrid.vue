@@ -10,6 +10,10 @@
             :key="index"
             class="polypod-container"
             :class="`polypod-container-${index}`"
+            :style="{ 
+                width: `${podSize.width}%`,
+                height: `${podSize.height}%`,
+            }"
         >
             <ReactivePolypod
                 :points="points"
@@ -61,6 +65,10 @@ export default {
                 y: 0,
             },
             podPositions: this.slides.map(() => ({ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` })),
+            podSize: {
+                width: 20,
+                height: 20,
+            },
         }
     },
     computed: {
@@ -96,7 +104,43 @@ export default {
                     y: this.marker.y - rawPosition.y - document.scrollingElement.scrollTop,
                 };
             }
-        }
+        },
+        spaceBetweenPods () {
+            return {
+                hex: {
+                    width: this.podSize.width * .5,
+                    height: this.podSize.height * .5,
+                },
+            }
+        },
+        // podPositions () {
+        //     let hProgress = 0;
+        //     let vProgress = 0;
+        //     let hOrientation = -1;
+        //     let vOrientation = 1;
+        //     let rowCount = 0;
+        //     let peiceCount = 0;
+        //     const hLimit = 6;
+        //     return this.slides.map((item, index) => {
+        //         hProgress = ((peiceCount));
+        //         console.log('vProgress', vProgress);
+        //         if (peiceCount > hLimit) {
+        //             hProgress = 0;
+        //             vOrientation *= -1;
+        //             peiceCount = 0;
+        //             rowCount++;
+        //             vProgress = ((rowCount) + .5);
+                    
+
+        //         }
+        //         hOrientation *= -1;
+        //         const hVal = Math.floor(hProgress) * hOrientation;
+        //         const vVal = Math.floor(vProgress) * hOrientation;
+        //         const pos = this.getPodPosition(6, { x: hVal, y: vVal });
+        //         peiceCount++;
+        //         return pos;
+        //     });
+        // },
         
     },
     methods: {
@@ -111,6 +155,28 @@ export default {
              };
             //  console.log(this.marker);
         },
+        // getPodPosition (sides, spaceFromCenter) {
+        //     let shape = 'hex';
+        //     switch (sides) {
+        //         case 6: {
+        //             shape = 'hex';
+        //             break;
+        //         }
+        //         case 4: {
+        //             shape = 'diamond';
+        //             break;
+        //         }
+        //         case 3: {
+        //             shape = 'triangle';
+        //             break;
+        //         }
+        //     }
+        //     const isOdd = spaceFromCenter.y / 2 === Math.round(spaceFromCenter.x / 2);
+        //     return {
+        //         x: 50 + ((spaceFromCenter.x - (isOdd ? .5 : 0)) * this.spaceBetweenPods[shape].width),
+        //         y: 50 + (spaceFromCenter.y * this.spaceBetweenPods[shape].height),
+        //     };
+        // },
     },
 }
 </script>
