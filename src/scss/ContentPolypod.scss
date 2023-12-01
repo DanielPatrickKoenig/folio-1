@@ -7,24 +7,24 @@
         height: 18%;
         position: absolute;
         transform: translate(-50%, -50%);
-        .reactive-polypod{
-            // transform: translate(-50%, -50%);
-        }
-        &-0{
-            left: convertToRems(300px);
-            top: convertToRems(75px);
-        }
-        &-1{
-            left: convertToRems(170.0961px);
-            top: convertToRems(150px);
-        }
-        &-2{
-            left: convertToRems(429.9039px);
-            top: convertToRems(150px);
-        }
-        &-3{
-            left: convertToRems(300px);
-            top: convertToRems(225px);
+        
+        $leftFactor: 1;
+        $leftSpace: 20;
+        $topFactor: .75;
+        $topSpace: 20;
+        $icons: (
+            "0": (50, 50),
+            "1": (50 - ($leftSpace * $leftFactor), 50),
+            "2": (50 + ($leftSpace * $leftFactor), 50),
+            "3": (50, 50 + ($topSpace * $topFactor)),
+            "4": (50, 50 - ($topSpace * $topFactor)),
+        );
+
+        @each $name, $glyph in $icons {
+            &-#{$name}{
+                left: nth($glyph, 1) * 1%;
+                top: nth($glyph, 2) * 1%;
+            }
         }
 
         //64.95195
