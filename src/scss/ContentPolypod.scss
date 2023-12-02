@@ -1,7 +1,7 @@
 $polygridWidth: convertToRems(600px);
 $polygridHeight: convertToRems(600px);
-$podWidth: 40;
-$podHeight: 40;
+$podWidth: 30;
+$podHeight: 30;
 .content-polypod-shell{
     width: $polygridWidth;
     height: $polygridHeight;
@@ -15,6 +15,16 @@ $podHeight: 40;
     }
 }
 .content-polypod{
+    &::before{
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 300%;
+        height: 300%;
+        display: block;
+    }
     position: relative;
     width: $polygridWidth;
     height: $polygridHeight;
