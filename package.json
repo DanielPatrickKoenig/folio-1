@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.12.3",
     "jstrig": "^1.0.4",
     "lodash": "^4.17.21",
     "vue": "^3.3.4"

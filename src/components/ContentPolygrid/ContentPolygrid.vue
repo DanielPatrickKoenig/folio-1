@@ -9,8 +9,10 @@
             ref="marker"
         />
         <DraggableContent
+            ref="dragger"
             :left="0"
             :top="0"
+            @position-complete="positionComplete"
         >
             <div 
                 class="content-polypod"
@@ -55,6 +57,8 @@ import BaseContentComponent from '../BaseContentComponent.js';
 import ReactivePolypod from '../Shared/ReactivePolypod.vue';
 import { processPointerEvent } from '../../utils/Utilities';
 import DraggableContent from '../shared/DraggableContent.vue';
+import jstrig from 'jstrig';
+import gsap from 'gsap';
 export default {
     name: 'ContentPolygrid',
     extends: BaseContentComponent,
@@ -80,11 +84,14 @@ export default {
     },
     computed: {
         podPosition () {
-            return index => {
+            return (index, fromCenter) => {
                 let position = { x: 0, y: 0 };
                 if (this.$refs[`pod${index}`] && this.$refs[`pod${index}`][0]) {
                     const podBounds = this.$refs[`pod${index}`][0].$el.getBoundingClientRect();
-                    position = { x: podBounds.left, y: podBounds.top };
+                    position = { 
+                        x: podBounds.left + (fromCenter ? podBounds.width / 2 : 0), 
+                        y: podBounds.top + (fromCenter ? podBounds.height / 2 : 0), 
+                    };
                 }
                 return position;
             };
@@ -111,6 +118,24 @@ export default {
                 };
             }
             return center;
+        },
+        positionComplete (e) {
+            const centerPoint = this.getCenterPoint();
+            const distList = this.slides.map((item, index) => ({ distance: jstrig.distance(this.podPosition(index, true), centerPoint), index}));
+            const closestIndex = distList.sort((a, b) => a.distance - b.distance)[0].index;
+            const closestPodPosition = this.podPosition(closestIndex, true);
+            const containerBounds = this.$refs.shell.getBoundingClientRect();
+            const posDiff = { x: closestPodPosition.x - (containerBounds.left + (containerBounds.width / 2)), y: (containerBounds.top + (containerBounds.height / 2)) - closestPodPosition.y };
+            const draggerPos = { ...e };
+            const targetPosition = { x: (e.x) - posDiff.x, y: (e.y) + posDiff.y };
+            gsap.to(draggerPos, {
+                ...targetPosition,
+                duration: .5,
+                onUpdate: () => {
+                    this.$refs.dragger.setPosition({ x: draggerPos.x, y: draggerPos.y });
+                },
+            });
+            
         },
     },
 }
