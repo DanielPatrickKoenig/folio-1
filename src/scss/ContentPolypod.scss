@@ -1,5 +1,7 @@
 $polygridWidth: convertToRems(600px);
 $polygridHeight: convertToRems(600px);
+$podWidth: 40;
+$podHeight: 40;
 .content-polypod-shell{
     width: $polygridWidth;
     height: $polygridHeight;
@@ -16,20 +18,19 @@ $polygridHeight: convertToRems(600px);
     position: relative;
     width: $polygridWidth;
     height: $polygridHeight;
-    transform: scale(1.5);
     .content-slide{
         opacity: .2;
     }
     .polypod-container{
-        width: 20%;
-        height: 20%;
+        width: $podWidth * 1%;
+        height: $podHeight * 1%;
         position: absolute;
         transform: translate(-50%, -50%);
         
         $leftFactor: (.933013 - .5) * 2;
-        $leftSpace: 20;
+        $leftSpace: $podWidth;
         $topFactor: .75;
-        $topSpace: 20;
+        $topSpace: $podHeight;
         $icons: (
             "0": (50, 50),
             "1": (50 - (($leftSpace * $leftFactor) * 1), 50),
