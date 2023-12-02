@@ -8,16 +8,27 @@
         position: absolute;
         transform: translate(-50%, -50%);
         
-        $leftFactor: 1;
+        $leftFactor: (.933013 - .5) * 2;
         $leftSpace: 20;
         $topFactor: .75;
         $topSpace: 20;
         $icons: (
             "0": (50, 50),
-            "1": (50 - ($leftSpace * $leftFactor), 50),
-            "2": (50 + ($leftSpace * $leftFactor), 50),
-            "3": (50, 50 + ($topSpace * $topFactor)),
-            "4": (50, 50 - ($topSpace * $topFactor)),
+            "1": (50 - (($leftSpace * $leftFactor) * 1), 50),
+            "2": (50 + (($leftSpace * $leftFactor) * 1), 50),
+            "3": (50 - (($leftSpace * $leftFactor) * 2), 50),
+            "4": (50 + (($leftSpace * $leftFactor) * 2), 50),
+            "5": (50 - (($leftSpace * $leftFactor) * .5), (50 - (($topSpace * $topFactor) * 1))),
+            "6": (50 + (($leftSpace * $leftFactor) * .5), (50 - (($topSpace * $topFactor) * 1))),
+            "7": (50 - (($leftSpace * $leftFactor) * .5), (50 - (($topSpace * $topFactor) * -1))),
+            "8": (50 + (($leftSpace * $leftFactor) * .5), (50 - (($topSpace * $topFactor) * -1))),
+            "9": (50 - (($leftSpace * $leftFactor) * 1.5), (50 - (($topSpace * $topFactor) * 1))),
+            "10": (50 + (($leftSpace * $leftFactor) * 1.5), (50 - (($topSpace * $topFactor) * 1))),
+            "11": (50 - (($leftSpace * $leftFactor) * 1.5), (50 - (($topSpace * $topFactor) * -1))),
+            "12": (50 + (($leftSpace * $leftFactor) * 1.5), (50 - (($topSpace * $topFactor) * -1))),
+            "13": (50 - (($leftSpace * $leftFactor) * 1), (50 - (($topSpace * $topFactor) * 2))),
+            "14": (50 + (($leftSpace * $leftFactor) * 1), (50 - (($topSpace * $topFactor) * 2))),
+            "15": (50 - (($leftSpace * $leftFactor) * 0), (50 - (($topSpace * $topFactor) * -2))),
         );
 
         @each $name, $glyph in $icons {
