@@ -8,7 +8,7 @@
             name="content"
             v-bind="{ points: reactivePoints }"
         />
-        <div :style="{ position: 'absolute', width: '3%', height: '3%', 'background-color': '#000000', left: `${markerPercentages.x}%`, top: `${markerPercentages.y}%` }" />
+        <!-- <div :style="{ position: 'absolute', width: '3%', height: '3%', 'background-color': '#000000', left: `${markerPercentages.x}%`, top: `${markerPercentages.y}%` }" /> -->
     </div>
 </template>
 
