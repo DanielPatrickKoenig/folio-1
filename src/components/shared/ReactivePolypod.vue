@@ -3,12 +3,15 @@
         class="reactive-polypod"
         ref="pod"
     >
-        <slot />
         <slot
             name="content"
+            v-bind="{ podCenter: centerPoint }"
+        />
+        <slot
+            name="points"
             v-bind="{ points: reactivePoints }"
         />
-        <!-- <div :style="{ position: 'absolute', width: '3%', height: '3%', 'background-color': '#000000', left: `${markerPercentages.x}%`, top: `${markerPercentages.y}%` }" /> -->
+        <!-- <div :style="{ position: 'absolute', width: '3%', height: '3%', 'background-color': '#000000', left: `${centerPoint.x}%`, top: `${centerPoint.y}%` }" /> -->
     </div>
 </template>
 
@@ -62,6 +65,28 @@ export default {
                 x: (this.markerX / this.$refs.pod?.getBoundingClientRect().width) * 100,
                 y: (this.markerY / this.$refs.pod?.getBoundingClientRect().height) * 100,
             };
+        },
+        centerPoint () {
+            const center = { x: 0, y: 0 };
+            switch (this.points) {
+                case 6:{
+                    const topPoint = this.reactivePoints[0];
+                    const bottomPoint = this.reactivePoints[3];
+                    const leftPoint = {
+                        x: this.reactivePoints[5].x + ((this.reactivePoints[4].x - this.reactivePoints[5].x) / 2),
+                        y: this.reactivePoints[5].y + ((this.reactivePoints[4].y - this.reactivePoints[5].y) / 2),
+                    };
+                    const rightPoint = {
+                        x: this.reactivePoints[1].x + ((this.reactivePoints[2].x - this.reactivePoints[1].x) / 2),
+                        y: this.reactivePoints[1].y + ((this.reactivePoints[2].y - this.reactivePoints[1].y) / 2),
+                    };
+                    const { x, y } = jstrig.intersection(topPoint, rightPoint, bottomPoint, leftPoint);
+                    center.x = x;
+                    center.y = y;
+                    break;
+                }
+            }
+            return center;
         },
     },
     methods: {

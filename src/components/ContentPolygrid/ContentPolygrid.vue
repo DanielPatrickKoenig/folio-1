@@ -30,11 +30,20 @@
                         :marker-y="markerForPodIndex(index).y"
                         :ref="`pod${index}`"
                     >
-                        <slot
-                            name="slide"
-                            v-bind="{ slide, index }"
-                        />
-                        <template #content="{ points }">
+                        <template #content="{ podCenter }">
+                            <div
+                                class="polypod-content-container"
+                                :class="{ active: closestIndex === index && Math.round(podCenter.x) === 50 && Math.round(podCenter.y) === 50 }"
+                                :style="{ left: `${podCenter.x}%`, top: `${podCenter.y}%` }"
+                            >
+                                <slot
+                                    name="slide"
+                                    v-bind="{ slide, index }"
+                                />
+                            </div>
+                        </template>
+                        
+                        <template #points="{ points }">
                             <div
                                 v-for="(point, i) in points"
                                 :key="i"
@@ -80,6 +89,7 @@ export default {
                 width: 20,
                 height: 20,
             },
+            closestIndex: -1,
         }
     },
     computed: {
@@ -119,10 +129,14 @@ export default {
             }
             return center;
         },
-        positionComplete (e) {
+        getSortedDistances () {
             const centerPoint = this.getCenterPoint();
             const distList = this.slides.map((item, index) => ({ distance: jstrig.distance(this.podPosition(index, true), centerPoint), index}));
-            const closestIndex = distList.sort((a, b) => a.distance - b.distance)[0].index;
+            return distList.sort((a, b) => a.distance - b.distance);
+        },
+        positionComplete (e) {
+            const closestIndex = this.getSortedDistances()[0].index;
+            this.closestIndex = closestIndex;
             const closestPodPosition = this.podPosition(closestIndex, true);
             const containerBounds = this.$refs.shell.getBoundingClientRect();
             const posDiff = { x: closestPodPosition.x - (containerBounds.left + (containerBounds.width / 2)), y: (containerBounds.top + (containerBounds.height / 2)) - closestPodPosition.y };
