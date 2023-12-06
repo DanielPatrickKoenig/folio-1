@@ -28,6 +28,7 @@
                         :points="points"
                         :marker-x="markerForPodIndex(index).x"
                         :marker-y="markerForPodIndex(index).y"
+                        :angle-offset="angleOffset(index)"
                         :ref="`pod${index}`"
                     >
                         <template #content="{ podCenter }">
@@ -115,7 +116,9 @@ export default {
                 };
             }
         },
-        
+        angleOffset () {
+            return index => this.points === 3 && index % 2 === 0 ? 180 : 0;
+        },
     },
     methods: {
         getCenterPoint () {

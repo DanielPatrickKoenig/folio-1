@@ -36,7 +36,12 @@ export default {
             default: 50,
             required: false,
             type: Number,
-        }
+        },
+        angleOffset: {
+            default: 0,
+            required: false,
+            type: Number,
+        },
     },
     data () {
         return {
@@ -50,7 +55,7 @@ export default {
     },
     computed: {
         staticPoints () {
-            return [...new Array(this.points).keys()].map(item => this.getPointPosition((360 / this.points) * item));
+            return [...new Array(this.points).keys()].map(item => this.getPointPosition(((360 / this.points) * item) + this.angleOffset));
         },
         reactivePoints () {
             return this.staticPoints.map(item => this.getReactivePosition(item));
@@ -81,6 +86,32 @@ export default {
                         y: this.reactivePoints[1].y + ((this.reactivePoints[2].y - this.reactivePoints[1].y) / 2),
                     };
                     const { x, y } = jstrig.intersection(topPoint, rightPoint, bottomPoint, leftPoint);
+                    center.x = x;
+                    center.y = y;
+                    break;
+                }
+                case 4:{
+                    const topPoint = this.reactivePoints[0];
+                    const bottomPoint = this.reactivePoints[2];
+                    const leftPoint = this.reactivePoints[3];
+                    const rightPoint = this.reactivePoints[1];
+                    const { x, y } = jstrig.intersection(topPoint, rightPoint, bottomPoint, leftPoint);
+                    center.x = x;
+                    center.y = y;
+                    break;
+                }
+                case 3:{
+                    const tl = {
+                        x: this.reactivePoints[0].x + ((this.reactivePoints[2].x - this.reactivePoints[0].x) / 2),
+                        y: this.reactivePoints[0].y + ((this.reactivePoints[2].y - this.reactivePoints[0].y) / 2),
+                    };
+                    const tr = {
+                        x: this.reactivePoints[0].x + ((this.reactivePoints[1].x - this.reactivePoints[0].x) / 2),
+                        y: this.reactivePoints[0].y + ((this.reactivePoints[1].y - this.reactivePoints[0].y) / 2),
+                    };
+                    const br = this.reactivePoints[1];
+                    const bl = this.reactivePoints[2];
+                    const { x, y } = jstrig.intersection(tl, tr, br, bl);
                     center.x = x;
                     center.y = y;
                     break;
