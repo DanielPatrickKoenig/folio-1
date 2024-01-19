@@ -7,9 +7,7 @@ import { basicColorMaterial } from '../../utils/THREEHelpers';
 export default class CarScene extends BaseScene{
     constructor(el){
         super(el);
-        this.carController = null;
-    }
-    initialize(){
+        console.log(this);
         const lc = new LightController({ environment: this.environment });
         lc.addLight({ type: LightTypes.DIRECTIONAL, intensity: 4, target: { x: 0, y: -10, z: -5 } });
 
@@ -42,7 +40,6 @@ export default class CarScene extends BaseScene{
         this.environment.createBox({size: {x: 6, y: 1, z: 8}, position: {x: 6, y: 0, z: -20}, mass: 0, material: basicColorMaterial('0000cc')});
 
         new LiftController({environment: this.environment, size: {x: 6, y: .25, z: 8}, position: {x: 0, y: .5, z: -20}, delay: 100});
-
 
     }
     getWidth(){

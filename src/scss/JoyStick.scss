@@ -1,0 +1,13 @@
+.joy-stick{
+    position: fixed;
+    width: 100vw;
+    height: convertToRems(120px);
+    bottom: 0;
+
+    .joy-stick-inner{
+        width: convertToRems(60px);
+        height: convertToRems(60px);
+        transform: translate(-50%, -50%);
+        background-color: #ff0000;;
+    }
+}
