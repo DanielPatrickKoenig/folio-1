@@ -121,7 +121,8 @@
 <script>
     import ContentCarouselDots from './ContentCarouselDots.vue';
     import BaseContentComponent from '../BaseContentComponent.js';
-    import { DataTypes } from '../../utils/Utilities';
+    // import { DataTypes } from '../../js/utils/Utilities';
+    import { DataTypes } from '../../js/utils/Utilities';
     export default {
         name: 'ContentCarousel',
         extends: BaseContentComponent,

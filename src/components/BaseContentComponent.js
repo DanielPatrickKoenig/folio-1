@@ -1,4 +1,4 @@
-import { DataTypes } from '../utils/Utilities';
+import { DataTypes } from '../js/utils/Utilities';
 export default{
     computed: {
         dataTypes () {

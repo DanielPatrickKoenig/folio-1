@@ -58,7 +58,7 @@
 <script>
 import ContentCarousel from '../ContentCarousel/ContentCarousel.vue'
 import BaseContentComponent from '../BaseContentComponent';
-import { DataTypes, convertToRems } from '../../utils/Utilities';
+import { DataTypes, convertToRems } from '../../js/utils/Utilities';
 export default {
     name: 'ContentCoverFlow',
     extends: BaseContentComponent,
@@ -114,7 +114,6 @@ export default {
                     property: 'autoplayInterval',
                     label: 'Autoplay Interval',
                     type: DataTypes.NUMBER,
-                    
                 },
             ];
         },

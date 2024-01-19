@@ -65,7 +65,7 @@
 <script>
 import BaseContentComponent from '../BaseContentComponent.js';
 import ReactivePolypod from '../Shared/ReactivePolypod.vue';
-import { processPointerEvent } from '../../utils/Utilities';
+import { processPointerEvent } from '../../js/utils/Utilities';
 import DraggableContent from '../shared/DraggableContent.vue';
 import jstrig from 'jstrig';
 import gsap from 'gsap';

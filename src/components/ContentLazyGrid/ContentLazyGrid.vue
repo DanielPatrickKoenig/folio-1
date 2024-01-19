@@ -28,7 +28,7 @@
 
 <script>
 import BaseContentComponent from '../BaseContentComponent.js';
-import { DataTypes } from '../../utils/Utilities';
+import { DataTypes } from '../../js/utils/Utilities';
 import { flatten } from 'lodash';
 export default {
     name: 'ContentLazyLoader',

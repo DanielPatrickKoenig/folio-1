@@ -48,7 +48,7 @@
 
 <script>
 import BaseContentComponent from '../BaseContentComponent.js';
-import { DataTypes, convertToRems } from '../../utils/Utilities';
+import { DataTypes, convertToRems } from '../../js/utils/Utilities';
 import DraggableContent from '../shared/DraggableContent.vue';
 import jstrig from 'jstrig';
 export default {

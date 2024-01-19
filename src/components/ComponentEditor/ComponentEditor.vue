@@ -56,7 +56,9 @@ import ContentScrapBook from '..//ContentScrapBook/ContentScrapBook.vue';
 import ContentLazyGrid from '..//ContentLazyGrid/ContentLazyGrid.vue';
 import ContentPages from '..//ContentPages/ContentPages.vue';
 import ContentPolygrid from '..//ContentPolygrid/ContentPolygrid.vue';
-import { DataTypes } from '../../utils/Utilities';
+import ContentDriver from '../ContentDriver/ContentDriver.vue';
+import { DataTypes } from '../../js/utils/Utilities';
+
 export default {
     components: {
         ContentCarousel,
@@ -66,6 +68,7 @@ export default {
         ContentLazyGrid,
         ContentPages,
         ContentPolygrid,
+        ContentDriver,
     },
     data () {
         return {
@@ -77,6 +80,7 @@ export default {
                 { label: 'Lazy Grid', component: ContentLazyGrid },
                 { label: 'Paginated', component: ContentPages },
                 { label: 'Polygrid', component: ContentPolygrid },
+                { label: 'Driver', component: ContentDriver },
             ],
             currentComponent: 0,
             availableComonents: [
