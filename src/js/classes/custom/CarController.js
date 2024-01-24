@@ -1,5 +1,5 @@
 import VehicleController from '../../classes/controllers/VehicleController';
-import { basicColorMaterial } from '../../utils/THREEHelpers';
+import { basicColorMaterial, getCanvasPoints, addShape } from '../../utils/THREEHelpers';
 import jstrig from 'jstrig';
 import { degreesToRadians } from '../../utils/Utilities';
 
@@ -7,10 +7,15 @@ export default class CarController extends VehicleController{
     constructor(data, models){
         super(data, models);
 
-       this.addExtras();
+        this.wheeleShapes = [];
 
+        this.updateHandler = () => {};
+        
+        this.addExtras();
+        this.addWheelMarkers();
 
-       this.addWheelMarkers();
+        this.frameMeshes = this.addFrame();
+        this.frameShape = [];
 
        
     }
@@ -32,6 +37,18 @@ export default class CarController extends VehicleController{
 
             });
         });
+    }
+
+    addFrame () {
+        const shapePoints = [
+            { x: .6, y: 0, z: 1 },
+            { x: -.6, y: 0, z: 1 },
+            { x: -.6, y: 0, z: -1 },
+            { x: .6, y: 0, z: -1 }
+        ];
+        return addShape(this.environment, shapePoints, this.chassis.mesh);
+        // const marker = this.environment.createSphere({ size: {r: .04}, position: { x: .6, y: 0, z: 1 }, material: basicColorMaterial('666666') });
+        // this.chassis.mesh.add(marker.mesh);
     }
 
     addExtras(){
@@ -71,5 +88,10 @@ export default class CarController extends VehicleController{
         this.environment.cameraContainer.position.z = newPosition.z;
 
         this.environment.cameraContainer.rotation.y = degreesToRadians(rawAngle) * -1;
+
+        // this.wheeleShapes = this.wheels.map(item => this.getWheelPoints(item.wheel.mesh.children));
+        this.wheeleShapes = this.wheels.map(item => getCanvasPoints(item.wheel.mesh.children, this.environment));
+        this.frameShape = getCanvasPoints(this.frameMeshes, this.environment)
+        this.updateHandler(this);
     }
 }

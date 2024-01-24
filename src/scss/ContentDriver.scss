@@ -2,3 +2,11 @@
     width: convertToRems(500px);
     height: convertToRems(500px);
 }
+.content-driver-svg{
+    width: convertToRems(250px);
+    height: convertToRems(500px);
+    .car-wheel{
+        fill: transparent;
+        stroke: #000000;
+    }
+}

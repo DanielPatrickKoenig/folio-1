@@ -90,6 +90,9 @@ function convertToRems (pixels) {
     const convertedValue = pixels / 16;
     return `${convertedValue}rem`;
 }
+function parseShapePoints (item, element, close) {
+    return item.map((_item, index) => `${index === 0 ? 'M' : 'L'} ${(_item.percent.x / 100) * element.getBoundingClientRect().width} ${(_item.percent.y / 100) * element.getBoundingClientRect().height}`).join(' ') + `${close ? ' Z' : ''}`;
+}
 // function processPointerEvent (e) {
 //     const values = {};
 //     if (e.type.includes('touch')) {
@@ -104,4 +107,4 @@ function convertToRems (pixels) {
 //     }
 //     return { x: values.x, y: values.y };
 // }
-export {nextTick, degreesToRadians, radiansToDegrees, ShapeTypes, defaultDimensionValues, processPointerEvent, generateID, getInheritanceChain, getParameterByName, cubicBezier, inside, DataTypes, convertToRems};
+export {nextTick, degreesToRadians, radiansToDegrees, ShapeTypes, defaultDimensionValues, processPointerEvent, generateID, getInheritanceChain, getParameterByName, cubicBezier, inside, DataTypes, convertToRems, parseShapePoints};

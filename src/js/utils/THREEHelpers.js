@@ -149,4 +149,19 @@ function getCanvasPosition(obj, environment)
     };
 
 };
-export {setRotation, RotationAxis, getRaycastIntersections, object3DSelector, createPrimitive, getCollisions, getDistance, basicImageMaterial, basicColorMaterial, createEmptyContainer, getCanvasPosition}
+
+function getCanvasPoints (meshes, environment) {
+    return meshes.map(item => getCanvasPosition(item, environment));
+}
+
+function addMarker (environment, position, container) {
+    const marker = environment.createSphere({ size: {r: .04}, position, material: basicColorMaterial('666666') });
+    container.add(marker.mesh);
+    return marker.mesh;
+
+}
+
+function addShape (environment, points, container) {
+    return points.map(item => addMarker(environment, item, container));
+}
+export {setRotation, RotationAxis, getRaycastIntersections, object3DSelector, createPrimitive, getCollisions, getDistance, basicImageMaterial, basicColorMaterial, createEmptyContainer, getCanvasPosition, getCanvasPoints, addMarker, addShape }
